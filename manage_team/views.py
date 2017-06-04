@@ -75,20 +75,20 @@ def update(request):
 			member = Member.objects.get(pk=id_member)
 		except:
 			return JsonResponse({"failed":"invalid id"})
-
-		first_name = data["first_name"]
-		last_name = data["last_name"]
-		email = data["email"]
-		role = data["role"]
-		phone = data["phone"]
-
-		if first_name is not None:
+		if "first_name" in data:
+			first_name = data["first_name"]
 			member.first_name=first_name
-		if last_name is not None:
-			member.last_name=last_name
-		if email is not None:
+		if "last_name" in data:
+			last_name = data["last_name"]
+			member.last_name=last_name	
+		if "email" in data:
+			email = data["email"]
 			member.email=email
-		if phone is not None:
+		if "role" in data:
+			role = data["role"]
+			member.role=role
+		if "phone" in data:
+			phone = data["phone"]
 			member.phone=phone
 		member.save()
 		role=None
