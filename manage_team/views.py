@@ -102,18 +102,6 @@ def update(request):
 '''This function can be used to view the product details'''
 @csrf_exempt
 def getProduct(request):
-	if not checkToken(request):
-		return JsonResponse({"success":False,"reason":"authentication failed"})
-
 	if request.method=="GET":
-		product_name = request.GET.get("product_name")
-		seller_name = request.GET.get("seller_name")
-		try:
-			prod = Product.objects.get(product_name=product_name,seller_name=seller_name)
-			category_list=[]
-			for i in prod.category.all():
-				category_list.append(i.name)
-			return JsonResponse({"success":True,"product":{"product_name":prod.product_name,
-				"seller_name":prod.seller_name,"quantity":prod.quantity,"price":prod.price,"category":category_list}})
-		except:
-			return JsonResponse({"success":False,"reason":"invalid couple of product and seller name."})
+		memebers = Member.objects.all()
+		import pdb;pdb.set_trace()
