@@ -103,5 +103,19 @@ def update(request):
 @csrf_exempt
 def getMembers(request):
 	if request.method=="GET":
-		memebers = Member.objects.all()
-		import pdb;pdb.set_trace()
+		members = Member.objects.all()
+		list_of_members=[]
+		for member in members:
+			list_of_members.append({
+					"first_name":member.first_name,
+					"last_name":member.last_name,
+					"email":member.email,
+					"id":member.id,
+					"role":member.role
+				})
+		return JsonResponse({"data":list_of_members})
+
+
+
+
+
