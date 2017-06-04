@@ -17,6 +17,8 @@ import uuid
 '''This function adds the member to the team'''
 
 def verifyEmail(email):
+	if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+		return False
 	return True
 
 @csrf_exempt
