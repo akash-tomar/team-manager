@@ -41,7 +41,8 @@ def addMember(request):
 			return JsonResponse({"failed":"invalid attribute values"})
 
 		return JsonResponse({"id":member.id,"first_name":member.first_name,"last_name":member.last_name,"email":member.email,"phone":member.phone,"role":role})
-
+	else:
+		return JsonResponse({"failed":"invalid request type"})
 
 '''This function deletes the team member'''
 @csrf_exempt
@@ -56,6 +57,8 @@ def deleteMember(request):
 			return JsonResponse({})
 		except:
 			return JsonResponse({"failed":"Invalid id"})
+	else:
+	return JsonResponse({"failed":"invalid request type"})
 
 '''This function can be used to update the team member details'''
 @csrf_exempt
@@ -98,6 +101,8 @@ def update(request):
 		else:
 			role="admin"
 		return JsonResponse({"id":member.id,"first_name":member.first_name,"last_name":member.last_name,"email":member.email,"phone":member.phone,"role":role})
+	else:
+	return JsonResponse({"failed":"invalid request type"})
 
 '''This function can be used to view all the team members'''
 @csrf_exempt
@@ -119,3 +124,5 @@ def getMembers(request):
 					"role":role
 				})
 		return JsonResponse({"data":list_of_members})
+	else:
+	return JsonResponse({"failed":"invalid request type"})
