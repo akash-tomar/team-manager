@@ -32,7 +32,7 @@ def addMember(request):
 		email = data["email"]
 		role = data["role"]
 		phone = data["phone"]
-		if (len(phone) != 10) and (not phone.isdigit()):
+		if (len(phone) != 10) or (not phone.isdigit()):
 			return JsonResponse({"failed":"invalid attribute values"})
 
 		role_num=1
