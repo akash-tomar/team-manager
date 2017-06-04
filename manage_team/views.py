@@ -86,7 +86,10 @@ def update(request):
 			member.email=email
 		if "role" in data:
 			role = data["role"]
-			member.role=role
+			if role=="0":
+				member.role="admin"
+			else:
+				member.role="regular"
 		if "phone" in data:
 			phone = data["phone"]
 			member.phone=phone
