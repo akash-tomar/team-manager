@@ -38,7 +38,6 @@ def addMember(request):
 		if not verifyEmail(email):
 			return JsonResponse({"failed":"invalid attribute values"})
 
-		# if user is not None:
 		try:
 			member = Member(first_name=first_name,last_name=last_name,email=email,phone=phone,role=role_num)
 			member.save()
@@ -62,7 +61,7 @@ def deleteMember(request):
 		except:
 			return JsonResponse({"failed":"Invalid id"})
 
-'''This function can be used to update the product details'''
+'''This function can be used to update the team member details'''
 @csrf_exempt
 def update(request):
 	if request.method=='POST':
@@ -99,23 +98,23 @@ def update(request):
 			role="admin"
 		return JsonResponse({"id":member.id,"first_name":member.first_name,"last_name":member.last_name,"email":member.email,"phone":member.phone,"role":role})
 
-'''This function can be used to view the product details'''
+'''This function can be used to view all the team members'''
 @csrf_exempt
 def getMembers(request):
 	if request.method=="GET":
 		members = Member.objects.all()
 		list_of_members=[]
 		for member in members:
+			role=None
+			if member.role==1:
+				role="regular"
+			else:
+				role="admin"
 			list_of_members.append({
 					"first_name":member.first_name,
 					"last_name":member.last_name,
 					"email":member.email,
 					"id":member.id,
-					"role":member.role
+					"role":role
 				})
 		return JsonResponse({"data":list_of_members})
-
-
-
-
-
