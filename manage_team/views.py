@@ -83,26 +83,21 @@ def update(request):
 		role = data["role"]
 		phone = data["phone"]
 
-		# if first_name is not None:
-
-
-		prod = None
-		try:
-			prod = Product.objects.get(product_name=product_name,seller_name=seller_name)
-		except:
-			return JsonResponse({"success":False,"reason":"Invalid couple of product and seller name."})
-
-		if "price" in data:
-			prod.price=data["price"]
-		if "quantity" in data:
-			prod.quantity=data['quantity']
-		if 'category' in data:
-			prod.category.clear()
-			for i in data["category"]:
-				Tag.objects.get_or_create(name=i)
-				prod.category.add(Tag.objects.get(name=i))
-		prod.save()
-		return JsonResponse({"success":True})
+		if first_name is not None:
+			member.first_name=first_name
+		if last_name is not None:
+			member.last_name=last_name
+		if email is not None:
+			member.email=email
+		if phone is not None:
+			member.phone=phone
+		member.save()
+		role=None
+		if member.role==1:
+			role="regular"
+		else:
+			role="admin"
+		return JsonResponse({"id":member.id,"first_name":member.first_name,"last_name":member.last_name,"email":member.email,"phone":member.phone,"role":role})
 
 '''This function can be used to view the product details'''
 @csrf_exempt
