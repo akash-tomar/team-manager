@@ -32,7 +32,7 @@ def addMember(request):
 		email = data["email"]
 		role = data["role"]
 		phone = data["phone"]
-		if (len(isbn) != 10) and (not isbn.isdigit()):
+		if (len(phone) != 10) and (not phone.isdigit()):
 			return JsonResponse({"failed":"invalid attribute values"})
 
 		role_num=1
@@ -96,6 +96,8 @@ def update(request):
 				member.role=1
 		if "phone" in data:
 			phone = data["phone"]
+			if (len(phone) != 10) and (not phone.isdigit()):
+				return JsonResponse({"failed":"invalid attribute values"})
 			member.phone=phone
 		member.save()
 		role=None
