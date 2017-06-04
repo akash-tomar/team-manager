@@ -101,7 +101,7 @@ def update(request):
 
 '''This function can be used to view the product details'''
 @csrf_exempt
-def getProduct(request):
+def getMembers(request):
 	if request.method=="GET":
 		memebers = Member.objects.all()
 		import pdb;pdb.set_trace()

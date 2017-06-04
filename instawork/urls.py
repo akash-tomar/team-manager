@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^addmember/',addMember,name='addmember'),
     url(r'^deletemember/',deleteMember,name='deletemember'),
+    url(r'^getmembers/',getMembers,name='getmembers'),
 ]
