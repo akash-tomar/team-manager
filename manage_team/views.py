@@ -1,26 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render
-from django.contrib.auth.models import User
-from django.contrib.auth import login as log
-from django.contrib.auth import logout as loggedout
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from .models import *
 import re
-from django.db.models import Q
-import uuid
-# Create your views here.
 
-'''This function adds the member to the team'''
-
+#return True if '@ 'and '.' is present else return False.
 def verifyEmail(email):
 	if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
 		return False
 	return True
 
+'''This function adds the member to the team'''
 @csrf_exempt
 def addMember(request):
 	if request.method=='POST':
@@ -33,14 +25,14 @@ def addMember(request):
 		role = data["role"]
 		phone = data["phone"]
 		if (len(phone) != 10) or (not phone.isdigit()):
-			return JsonResponse({"failed":"invalid attribute values"})
+			return JsonResponse({"failed":"invalid phone number"})
 
 		role_num=1
 		if role.lower()=="admin":
 			role_num=0
 
 		if not verifyEmail(email):
-			return JsonResponse({"failed":"invalid attribute values"})
+			return JsonResponse({"failed":"invalid email id"})
 
 		try:
 			member = Member(first_name=first_name,last_name=last_name,email=email,phone=phone,role=role_num)
