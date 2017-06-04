@@ -56,7 +56,7 @@ def deleteMember(request):
 		data = json.loads(data)
 		id_member = data["id"]
 		try:
-			member = Member.objects.get(pd=id_member)
+			member = Member.objects.get(pk=id_member)
 			member.delete()
 			return JsonResponse({})
 		except:
