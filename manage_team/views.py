@@ -38,19 +38,19 @@ def addMember(request):
 		if not verifyEmail(email):
 			return JsonResponse({"failed":"invalid attribute values"})
 
-		if user is not None:
-			try:
-				member = Member(first_name=first_name,last_name=last_name,email=email,phone=phone,role=role_num)
-				member.save()
-			except:
-				return JsonResponse({"failed":"invalid attribute values"})
+		# if user is not None:
+		try:
+			member = Member(first_name=first_name,last_name=last_name,email=email,phone=phone,role=role_num)
+			member.save()
+		except:
+			return JsonResponse({"failed":"invalid attribute values"})
 
 		return JsonResponse({"id":member.id,"first_name":member.first_name,"last_name":member.last_name,"email":member.email,"phone":member.phone,"role":role})
 
 
 '''This function deletes the team member'''
 @csrf_exempt
-def deletemember(request):
+def deleteMember(request):
 	if request.method=="DELETE":
 		data = request.body
 		data = json.loads(data)
