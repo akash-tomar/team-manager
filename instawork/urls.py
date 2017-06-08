@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from manage_team.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^addmember/',addMember,name='addmember'),
+    url(r'^deletemember/',deleteMember,name='deletemember'),
+    url(r'^getmembers/',getMembers,name='getmembers'),
+    url(r'^update/',update,name='update'),
 ]
